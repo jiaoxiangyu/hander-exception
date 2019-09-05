@@ -13,8 +13,8 @@ import cn.lookk.handerexception.constants.ResultEnum;
  */
 public class AssertException extends RuntimeException {
 
-    private int code= ResultEnum.SERVER_ERROR.getCode();
-    private String msg;
+    private static int code= ResultEnum.SERVER_ERROR.getCode();
+    private static String msg= ResultEnum.SERVER_ERROR.getMsg();
 
 
 
@@ -23,11 +23,13 @@ public class AssertException extends RuntimeException {
     }
 
     public AssertException(ResultEnum resultEnum) {
+        super(resultEnum.getMsg());
         this.code = resultEnum.getCode();
         this.msg = resultEnum.getMsg();
     }
 
     public AssertException(int code, String msg) {
+        super(msg);
         this.code = code;
         this.msg = msg;
     }

@@ -3,9 +3,11 @@ package cn.lookk.handerexception.controller;
 
 import cn.lookk.handerexception.constants.ResultEnum;
 import cn.lookk.handerexception.exception.Assert;
+import cn.lookk.handerexception.service.IAssertTestService;
 import cn.lookk.handerexception.util.ResultUtil;
 import cn.lookk.handerexception.vo.Result;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/assert")
 public class AssertTestController {
+
+    @Autowired
+    private IAssertTestService assertTestService;
 
     @RequestMapping(value = "success", method = RequestMethod.GET)
     public Result success(){
@@ -65,5 +70,22 @@ public class AssertTestController {
         return ResultUtil.success();
     }
 
+    /**
+     * @title:  serviceException
+     * @description:  test serviceException
+     * @param
+     * @return  cn.lookk.handerexception.vo.Result
+     */
+    @RequestMapping(value = "serviceException", method = RequestMethod.GET)
+    public Result serviceException(){
+        assertTestService.testServiceException();
+        return ResultUtil.success();
+    }
+
+    @RequestMapping(value = "logException", method = RequestMethod.GET)
+    public Result logException(){
+        Assert.isBlank("", ResultEnum.STRING_NULL.getMsg());
+        return ResultUtil.success();
+    }
 
 }

@@ -36,8 +36,14 @@ public class ExceptionHandler {
      */
     @org.springframework.web.bind.annotation.ExceptionHandler(AssertException.class)
     public Result handleAssertException(HttpServletRequest request, AssertException e){
-       logger.error("AssertException code:{}, msg:{}", e.getCode(), e.getMsg());
+       logger.error("AssertException code:{}, msg: {}", e.getCode(), e.getMsg());
         return ResultUtil.error(e.getCode(), e.getMsg());
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(LogException.class)
+    public Result handleLogException(HttpServletRequest request, LogException e){
+        logger.error("LogException msg: {}",  e.getMsg());
+        return ResultUtil.error(code, msg);
     }
 
     /**
@@ -49,7 +55,7 @@ public class ExceptionHandler {
      */
     @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
     public Result handleException(HttpServletRequest request, Exception e){
-        logger.error("ServerException code:{}, msg:{}", code, msg, e);
+        logger.error("ServerException code:{}, msg: {}", code, msg, e);
         return ResultUtil.error(code, msg);
     }
 
