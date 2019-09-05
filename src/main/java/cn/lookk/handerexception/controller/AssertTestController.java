@@ -71,6 +71,19 @@ public class AssertTestController {
     }
 
     /**
+     * @title:  isLessThanZero
+     * @description:  TODO
+     * @param
+     * @return  cn.lookk.handerexception.vo.Result
+     */
+    @RequestMapping(value = "isLessThanZero", method = RequestMethod.GET)
+    public Result isLessThanZero(){
+        Object param=null;
+        Assert.isLessThanZero(-1, ResultEnum.INTEGER_LESS_THAN_ZERO);
+        return ResultUtil.success();
+    }
+
+    /**
      * @title:  serviceException
      * @description:  test serviceException
      * @param
@@ -82,6 +95,12 @@ public class AssertTestController {
         return ResultUtil.success();
     }
 
+    /**
+     * @title:  logException
+     * @description:  TODO
+     * @param
+     * @return  cn.lookk.handerexception.vo.Result
+     */
     @RequestMapping(value = "logException", method = RequestMethod.GET)
     public Result logException(){
         Assert.isBlank("", ResultEnum.STRING_NULL.getMsg());
